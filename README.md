@@ -44,20 +44,22 @@ So far, the project has:
 
 ## Project Structure
 
+```plaintext
 member_qa/
 │
 ├── data/
-│ ├── response_minified.json # Optional smaller version of the dataset
-│ ├── response.json # Raw API dump (fetched using curl)
-│ └── store.json # Cleaned data grouped by member first name
+│   ├── response_minified.json      # Optional smaller version of the dataset
+│   ├── response.json               # Raw API dump (fetched using curl)
+│   └── store.json                  # Cleaned data grouped by member first name
 │
 ├── src/
-│ ├── clean_data.py # Converts response.json → store.json
-│ ├── extract.py # get_messages, get_prompt, link_llm
-│ │
-│ └── test/ # test utilities
-│ ├── list_models.py # Lists all available Gemini models
-│ └── test_gemini.py # Quick test script for API and key verification
+│   ├── clean_data.py               # Converts response.json → store.json
+│   ├── extract.py                  # get_messages, get_prompt, link_llm
+│   │
+│   └── test/                       # Test utilities
+│       ├── list_models.py          # Lists all available Gemini models
+│       └── test_gemini.py          # Quick test script for API and key verification
 │
-├── venv/ # Python virtual environment (ignored by Git)
-└── README.md # Project documentation
+├── venv/                           # Python virtual environment (ignored by Git)
+└── README.md                       # Project documentation
+```
