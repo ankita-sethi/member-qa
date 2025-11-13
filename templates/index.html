@@ -164,11 +164,14 @@
         appendMessage("Thinking...", "bot");
 
         try {
-          const res = await fetch(window.location.origin + "/api/ask/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question }),
-          });
+          const res = await fetch(
+            "https://member-qa-9vly.onrender.com/api/ask/",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ question }),
+            }
+          );
           const data = await res.json();
           chatBox.lastChild.textContent = data.answer || "No response.";
         } catch {
