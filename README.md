@@ -63,6 +63,12 @@ curl -X POST "https://member-qa-9vly.onrender.com/api/ask/" \
 
 5. Send
 
+### Required: Gemini API Key (for local runs)
+
+To run this project locally, create a `.env` file and add:
+
+GEMINI_API_KEY=your_api_key_here
+
 ## Quick Test Prompts
 
 Try any of these:
