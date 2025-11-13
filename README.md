@@ -17,6 +17,44 @@ The model never hallucinates and only uses verified message history.
 
 ---
 
+## Live Deployment (Public API)
+
+Your question answering system is deployed here:
+
+https://member-qa-9vly.onrender.com
+
+This URL opens a small demo chatbot UI.
+
+## API Endpoint
+
+The main endpoint is:
+
+POST https://member-qa-9vly.onrender.com/api/ask/
+
+### Example cURL
+
+curl -X POST "https://member-qa-9vly.onrender.com/api/ask/" \
+ -H "Content-Type: application/json" \
+ -d '{"question": "When is Layla planning her trip to London?"}'
+
+### Example Response
+
+{ "answer": "Layla is planning her trip to London next month." }
+
+## Quick Test Prompts
+
+Try any of these:
+
+"What are Amina’s favorite restaurants?"
+
+"When is Layla planning her trip?"
+
+"What is Sophia’s number?"
+
+"Update Armand’s phone number to 555-9999."
+
+"Where is Lily currently staying?"
+
 ## Features
 
 - Loads and organizes each member's message history from JSON files
