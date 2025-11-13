@@ -70,120 +70,49 @@ The model never hallucinates and only uses verified message history.
 
 ## API Example
 
-### Request
+## Request
 
 ```json
 POST /api/ask
 {
   "question": "When is Amina’s husband’s birthday?"
 }
+```
 
-##Response
+## Response
+
+```json
 {
   "answer": "Amina’s husband’s birthday is on July 6th."
 }
+```
 
-##Project Structure
+## Project Structure
 
+```
 member_qa/
 │
 ├── data/
 │   ├── response.json      # Raw dataset
 │   ├── store.json         # Cleaned messages by member
-│   └── current.json       # Factual runtime updates
+│   └── current.json       # Runtime updates saved by the bot
 │
 ├── src/
 │   ├── clean_data.py      # Converts raw → structured JSON
-│   ├── extract.py         # Filtering, prompts, Gemini logic
+│   ├── extract.py         # Filtering, LLM prompts, Gemini logic
 │   └── test/
 │       ├── list_models.py # Lists available Gemini models
-│       └── test_gemini.py # Verifies API key
+│       └── test_gemini.py # Verifies API key access
 │
 ├── templates/
-│   ├── index.html
-│   #Minimal chatbot UI
+│   └── index.html         # Minimal chatbot UI
 │
 ├── qa_service/
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
 │
+├── manage.py
 ├── requirements.txt
 └── README.md
-
-## Architecture
-
-            ┌────────────────────────────┐
-            │       User Question        │
-            └───────────────┬────────────┘
-                            │
-                            ▼
-            ┌────────────────────────────┐
-            │   Django API /api/ask      │
-            └───────────────┬────────────┘
-                            │
-                            ▼
-            ┌────────────────────────────────────┐
-            │   Load store.json + current.json   │
-            └───────────────┬────────────────────┘
-                            │
-                            ▼
-            ┌────────────────────────────────────┐
-            │   Filter relevant message lines    │
-            └───────────────┬────────────────────┘
-                            │
-                            ▼
-            ┌────────────────────────────────────┐
-            │    Build reasoning-based prompt    │
-            └───────────────┬────────────────────┘
-                            │
-                            ▼
-            ┌──────────────────────────────┐
-            │    Gemini LLM (Flash/Pro)    │
-            └───────────────┬──────────────┘
-                            │
-                            ▼
-            ┌────────────────────────────────┐
-            │  Return short factual answer   │
-            └────────────────────────────────┘
-
-## Setting Up Your API Key
-
-Create a `.env` file in the project root:
-
-GEMINI_API_KEY=your_key_here
-
-
-Or export it directly in your terminal:
-
-export GEMINI_API_KEY="your_key_here"
-
-Test your setup:
-
-python src/test/test_gemini.py
-
-
-## Running Locally
-
-### 1. Create and activate a virtual environment
-      python3 -m venv venv
-      source venv/bin/activate
-
-### 2. Install dependencies
-      pip install -r requirements.txt
-
-### 3. Start the Django server
-      python manage.py runserver
-
-### 4. Test the API
-
-      curl -X POST -H "Content-Type: application/json" \
-     -d '{"question": "When is Layla planning her trip to London?"}' \http://127.0.0.1:8000/api/ask/
-
-## Future Improvements
-   1. Move from JSON files to a PostgreSQL database
-
-   2. Add vector search for improved retrieval
-
-   3. Expand the chatbot UI (animations, history, multi-member switching)
 ```
