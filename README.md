@@ -225,3 +225,9 @@ member_qa/
          │ { "answer": "…" }  │
          └────────────────────┘
 ```
+
+## Future Improvements
+
+- Move from JSON files -> PostgreSQL, enabling faster queries, better organization and long-term scalability.
+
+- Add Redis caching so repeated questions return instantly.
