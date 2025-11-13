@@ -45,15 +45,15 @@ curl -X POST "https://member-qa-9vly.onrender.com/api/ask/" \
 
 Try any of these:
 
-"What are Amina’s favorite restaurants?"
+- "What are Amina’s favorite restaurants?"
 
-"When is Layla planning her trip?"
+- "When is Layla planning her trip?"
 
-"What is Sophia’s number?"
+- "What is Sophia’s number?"
 
-"Update Armand’s phone number to 555-9999."
+- "Update Armand’s phone number to 555-9999."
 
-"Where is Lily currently staying?"
+- "Where is Lily currently staying?"
 
 ## Features
 
