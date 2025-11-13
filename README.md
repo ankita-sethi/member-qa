@@ -72,8 +72,11 @@ The model never hallucinates and only uses verified message history.
 
 ## Request
 
-```json
+```http
 POST /api/ask
+```
+
+```json
 {
   "question": "When is Amina’s husband’s birthday?"
 }
