@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Member QA Bot</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f8ff;
+        color: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .dark {
+        background: #0b1220;
+        color: #e5e7eb;
+      }
+
+      .chat-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        max-width: 90%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dark .chat-container {
+        background: #1e293b;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .left-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      button {
+        background: #00b7ff;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        padding: 8px 14px;
+      }
+
+      .reset-btn {
+        background: none;
+        color: inherit;
+        font-size: 30px;
+        padding: 2px 6px;
+      }
+
+      .chat-box {
+        flex: 1;
+        overflow-y: auto;
+        margin: 10px 0;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .message {
+        margin: 6px 0;
+        padding: 8px 12px;
+        border-radius: 12px;
+        max-width: 80%;
+      }
+
+      .user {
+        background: #00b7ff;
+        color: white;
+        align-self: flex-end;
+      }
+
+      .bot {
+        background: rgba(0, 0, 0, 0.1);
+        align-self: flex-start;
+      }
+
+      .input-area {
+        display: flex;
+        gap: 6px;
+      }
+
+      input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #00b7ff;
+      }
+      @media (max-width: 500px) {
+        .chat-container {
+          width: 95%;
+          height: 90%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="chat-container">
+      <div class="header">
+        <div class="left-controls">
+          <button class="reset-btn" onclick="resetChat()" title="Reset">
+            ⟳
+          </button>
+          <h3>Member QA Bot</h3>
+        </div>
+        <button id="theme-btn">Dark</button>
+      </div>
+
+      <div id="chat-box" class="chat-box"></div>
+
+      <div class="input-area">
+        <input
+          type="text"
+          id="question"
+          placeholder="Ask about a member..."
+          onkeydown="if(event.key==='Enter') askQuestion()"
+        />
+        <button onclick="askQuestion()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      const chatBox = document.getElementById("chat-box");
+      const themeBtn = document.getElementById("theme-btn");
+
+      function appendMessage(text, sender) {
+        const msg = document.createElement("div");
+        msg.className = "message " + sender;
+        msg.textContent = text;
+        chatBox.appendChild(msg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      async function askQuestion() {
+        const input = document.getElementById("question");
+        const question = input.value.trim();
+        if (!question) return;
+
+        appendMessage(question, "user");
+        input.value = "";
+        appendMessage("Thinking...", "bot");
+
+        try {
+          const res = await fetch(window.location.origin + "/api/ask/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question }),
+          });
+          const data = await res.json();
+          chatBox.lastChild.textContent = data.answer || "No response.";
+        } catch {
+          chatBox.lastChild.textContent = "Something went wrong.";
+        }
+      }
+
+      function resetChat() {
+        chatBox.innerHTML = "";
+        appendMessage("Chat reset. Ask me anything!", "bot");
+      }
+
+      themeBtn.onclick = () => {
+        document.body.classList.toggle("dark");
+        themeBtn.textContent = document.body.classList.contains("dark")
+          ? "Light"
+          : "Dark";
+      };
+
+      appendMessage("Hi! Ask me about any member.", "bot");
+      // Automatically focus on the input field when the page loads
+      document.getElementById("question").focus();
+    </script>
+  </body>
+</html>
