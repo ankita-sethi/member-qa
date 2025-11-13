@@ -157,3 +157,45 @@ member_qa/
 ├── requirements.txt
 └── README.md
 ```
+
+## Architecture
+
+```
+
+          ┌───────────────┐
+          │  /api/ask     │   ← User question
+          └──────┬────────┘
+                 │
+                 ▼
+        ┌───────────────────┐
+        │Extract Member Name│
+        └─────────┬─────────┘
+                  │
+                  ▼
+        ┌─────────────────────┐
+        │ Load store.json     │
+        │ Load current.json   │
+        └──────────┬──────────┘
+                   │ merged
+                   ▼
+        ┌──────────────────────┐
+        │ Filter Relevant Lines│  ← Gemini-based filtering
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌──────────────────────┐
+        │Build Reasoning Prompt│
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌──────────────────────┐
+        │Gemini 2.5 Flash Lite │
+        │   Generates Answer   │
+        └──────────┬───────────┘
+                   │
+                   ▼
+         ┌────────────────────┐
+         │  JSON Response     │
+         │ { "answer": "…" }  │
+         └────────────────────┘
+```
