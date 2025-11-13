@@ -21,25 +21,47 @@ The model never hallucinates and only uses verified message history.
 
 Your question answering system is deployed here:
 
+Chatbot UI (Frontend)
+
 https://member-qa-9vly.onrender.com
 
-This URL opens a small demo chatbot UI.
+This URl opens a small demo UI where you can type questions.
 
 ## API Endpoint
 
-The main endpoint is:
+The main public API route
 
 POST https://member-qa-9vly.onrender.com/api/ask/
 
-### Example cURL
+## How to Test the API
+
+### Option 1 — cURL
 
 curl -X POST "https://member-qa-9vly.onrender.com/api/ask/" \
- -H "Content-Type: application/json" \
- -d '{"question": "When is Layla planning her trip to London?"}'
+-H "Content-Type: application/json" \
+-d '{"question": "When is Layla planning her trip to London?"}'
 
 ### Example Response
 
 { "answer": "Layla is planning her trip to London next month." }
+
+### Option 2 — Postman
+
+1. New request -> POST
+
+2. URL: https://member-qa-9vly.onrender.com/api/ask/
+
+3. Body -> raw -> JSON
+
+4. Enter:
+
+```json
+{
+  "question": "When is Amina’s husband’s birthday?"
+}
+```
+
+5. Send
 
 ## Quick Test Prompts
 
@@ -54,6 +76,10 @@ Try any of these:
 - "Update Armand’s phone number to 555-9999."
 
 - "Where is Lily currently staying?"
+
+## Demo
+
+[Demo: Member Q-A system](https://drive.google.com/file/d/13wZfbkrw4aGsF0BVj1CB7kf7QWmmwnHn/view?usp=sharing)
 
 ## Features
 
