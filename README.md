@@ -87,6 +87,8 @@ Try any of these:
 
 [Demo: Member Q-A system](https://drive.google.com/file/d/1nt58Ejj5xFMPSlWo7G0J46Rsv_lRqSTI/view?usp=sharing)
 
+[Demo: Member Q-A system (YouTube Link)](https://youtu.be/x4I4jszN_ss)
+
 ## Features
 
 - Loads and organizes each member's message history from JSON files
